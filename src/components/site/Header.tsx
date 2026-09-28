@@ -21,11 +21,13 @@ export function Header() {
     };
   }, [open]);
 
+  const onDark = !scrolled && !open;
+
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
+        scrolled || open
           ? "border-b border-border/70 bg-background/85 backdrop-blur-md"
           : "border-b border-transparent",
       )}
@@ -33,7 +35,10 @@ export function Header() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 sm:h-20 sm:px-8">
         <a
           href="#inicio"
-          className="font-display text-[0.95rem] tracking-[0.18em] uppercase sm:text-base"
+          className={cn(
+            "font-display text-[0.95rem] tracking-[0.18em] uppercase transition-colors duration-500 sm:text-base",
+            onDark ? "text-espresso-foreground" : "text-foreground",
+          )}
         >
           Rudimentar<span className="text-clay"> Coffee®</span>
         </a>
@@ -43,7 +48,12 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="relative text-[0.8rem] tracking-wide text-muted-foreground transition-colors hover:text-foreground after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-clay after:transition-all after:duration-300 hover:after:w-full"
+              className={cn(
+                "relative text-[0.8rem] tracking-wide transition-colors duration-300 after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-0 after:bg-clay after:transition-all after:duration-300 hover:after:w-full",
+                onDark
+                  ? "text-cream/75 hover:text-espresso-foreground"
+                  : "text-muted-foreground hover:text-foreground",
+              )}
             >
               {l.label}
             </a>
@@ -55,7 +65,12 @@ export function Header() {
             href={brand.whatsapp}
             target="_blank"
             rel="noreferrer noopener"
-            className="hidden items-center gap-2 rounded-sm bg-primary px-5 py-2.5 text-[0.78rem] font-medium tracking-wide text-primary-foreground transition-all duration-300 hover:bg-espresso hover:shadow-soft sm:inline-flex"
+            className={cn(
+              "hidden items-center gap-2 rounded-sm px-5 py-2.5 text-[0.78rem] font-medium tracking-wide transition-all duration-300 hover:shadow-soft sm:inline-flex",
+              onDark
+                ? "bg-cream text-espresso hover:bg-espresso-foreground"
+                : "bg-primary text-primary-foreground hover:bg-espresso",
+            )}
           >
             <MessageCircle className="size-4" aria-hidden />
             Fale conosco
@@ -65,12 +80,18 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
             aria-label={open ? "Fechar menu" : "Abrir menu"}
             aria-expanded={open}
-            className="inline-flex size-10 items-center justify-center rounded-sm border border-border text-foreground transition-colors hover:bg-secondary lg:hidden"
+            className={cn(
+              "inline-flex size-10 items-center justify-center rounded-sm border transition-colors lg:hidden",
+              onDark
+                ? "border-cream/35 text-espresso-foreground hover:bg-cream/10"
+                : "border-border text-foreground hover:bg-secondary",
+            )}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
+
 
       {open && (
         <div className="border-t border-border bg-background lg:hidden">

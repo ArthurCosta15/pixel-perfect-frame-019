@@ -16,12 +16,13 @@ export function Hero() {
         alt="Barista servindo um espresso em xícara de cerâmica no balcão da cafeteria"
         width={1600}
         height={1200}
-        className="absolute inset-0 size-full object-cover opacity-70"
+        className="absolute inset-0 size-full object-cover"
       />
       <div
-        className="absolute inset-0 bg-espresso/70 sm:bg-gradient-to-r sm:from-espresso/92 sm:via-espresso/70 sm:to-espresso/25"
+        className="absolute inset-0 bg-espresso/62 sm:bg-gradient-to-r sm:from-espresso/88 sm:via-espresso/52 sm:to-espresso/10"
         aria-hidden
       />
+
 
       <div className="relative mx-auto flex min-h-[92svh] max-w-7xl flex-col justify-end px-5 pt-32 pb-14 sm:px-8 sm:pb-20 lg:min-h-[88svh]">
         <div className="max-w-2xl animate-rise">
